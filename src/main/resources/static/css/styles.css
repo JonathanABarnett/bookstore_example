@@ -1,0 +1,21 @@
+.box {
+    border: solid 1px red;
+}
+
+.container {
+    width: 90%;
+}
+
+.img {
+    position: relative;
+    float: left;
+    width:  100px;
+    height: 100px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
+
+#brand-image {
+    height: 35px;
+}
