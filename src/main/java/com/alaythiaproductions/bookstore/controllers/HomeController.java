@@ -1,6 +1,7 @@
 package com.alaythiaproductions.bookstore.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -8,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
 
     @RequestMapping(value = "/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("title", "Bookstore Home");
         return "views/index";
     }
 }
