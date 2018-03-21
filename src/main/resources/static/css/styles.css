@@ -33,3 +33,10 @@
 #featured-books-container {
     width: 80%;
 }
+#my-account {
+    background-image: url("../img/wood-bg.jpeg");
+    height: 100%;
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: cover;
+}
