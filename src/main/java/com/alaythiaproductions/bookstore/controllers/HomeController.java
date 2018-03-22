@@ -3,8 +3,7 @@ package com.alaythiaproductions.bookstore.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class HomeController {
@@ -15,9 +14,25 @@ public class HomeController {
         return "views/index";
     }
 
-    @GetMapping(value = "/myAccount")
-    public String myAccount(Model model) {
-        model.addAttribute("title", "My Account");
+    @GetMapping(value = "/createAccount")
+    public String createAccount(Model model) {
+        model.addAttribute("title", "Create Account");
+        model.addAttribute("classActiveCreate", true);
         return "views/myAccount";
     }
+
+    @GetMapping(value = "/login")
+    public String login(Model model) {
+        model.addAttribute("title", "Login");
+        model.addAttribute("classActiveLogin", true);
+        return "views/myAccount";
+    }
+
+    @GetMapping(value = "/forgotPassword")
+    public String forgotPassword(Model model) {
+        model.addAttribute("title", "Forgot Password");
+        model.addAttribute("classActiveForgot", true);
+        return "views/myAccount";
+    }
+
 }
