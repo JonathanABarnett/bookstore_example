@@ -7,6 +7,8 @@ import com.alaythiaproductions.bookstore.models.security.UserRole;
 import com.alaythiaproductions.bookstore.repository.PasswordResetTokenRepository;
 import com.alaythiaproductions.bookstore.repository.RoleRepository;
 import com.alaythiaproductions.bookstore.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private PasswordResetTokenRepository passwordResetTokenRepository;
@@ -46,11 +50,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user, Set<UserRole> userRoles) throws Exception{
+    public User createUser(User user, Set<UserRole> userRoles)  {
         User localUser = userRepository.findByUsername(user.getUsername());
 
         if (null != localUser) {
-            throw new Exception("User already exists.");
+           LOG.info("user {} User already exists.", user.getUsername());
         } else {
             for (UserRole userRole : userRoles) {
                 roleRepository.save(userRole.getRole());
@@ -61,5 +65,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return localUser;
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
     }
 }

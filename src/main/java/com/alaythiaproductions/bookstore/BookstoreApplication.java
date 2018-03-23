@@ -30,7 +30,7 @@ public class BookstoreApplication implements CommandLineRunner{
 		user.setLastName("Istrator");
 		user.setUsername("Admin");
 		user.setPassword(SecurityUtility.passwordEncoder().encode("123"));
-		user.setEmail("alaythiaproductions@gmail.com");
+		user.setEmail("admin@mail.com");
 		Set<UserRole> userRoles = new HashSet<>();
 		Role role = new Role();
 		role.setRoleId(1);

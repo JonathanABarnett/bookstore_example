@@ -42,39 +42,38 @@
 
                         <div class="bg-info" th:if="${updateUserInfo}">User Information Updated</div>
 
-
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
+                            <div class="form-row">
+                                <div class="col">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" class="form-group" id="firstName" name="firstName" th:value="${user.firstName}" />
+                                    <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}" />
                                 </div>
-                                <div class="col-6">
+                                <div class="col">
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" class="form-group" id="lastName" name="lastName" th:value="${user.lastName}" />
+                                    <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}" />
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-group" id="username" name="username" th:value="${user.username}" />
+                            <input type="text" class="form-control" id="username" name="username" th:value="${user.username}" />
                         </div>
                         <div class="form-group">
                             <label for="currentPassword">Current Password</label>
-                            <input type="text" class="form-group" id="currentPassword" name="currentPassword" th:value="${currentPassword}" />
+                            <input type="text" class="form-control" id="currentPassword" name="currentPassword" th:value="${currentPassword}" />
                         </div>
                         <p class="text-mute">Enter your current password to change the email address or password.</p>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-group" id="email" name="email" th:value="${user.email}" />
+                            <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" />
                         </div>
                         <div class="form-group">
                             <label for="textConfirmPassword">Confirm Password</label>
-                            <input type="password" class="form-group" id="textConfirmPassword" name="newPassword" />
+                            <input type="password" class="form-control" id="textConfirmPassword" name="newPassword" />
                         </div>
                         <div class="form-group">
                             <label for="textNewPassword">Password</label>
-                            <input type="password" class="form-group" id="textNewPassword" name="newPassword" />
+                            <input type="password" class="form-control" id="textNewPassword" name="newPassword" />
                         </div>
                         <button class="btn btn-info" type="submit">Create New Account</button>
                     </form>
@@ -84,7 +83,7 @@
                     <form>
                         <div class="form-group">
                             <label for="username">* Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required="required"
+                            <input type="text" class="form-control" id="user" name="username" required="required"
                                    placeholder="Enter Username"/>
                         </div>
                         <div class="form-group">

@@ -71,8 +71,9 @@ public class HomeController {
                 userDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        model.addAttribute("classActiveEdit", true);
 
+        model.addAttribute("user", user);
+        model.addAttribute("classActiveEdit", true);
 
         return "views/myProfile";
     }
@@ -80,6 +81,7 @@ public class HomeController {
     @PostMapping(value = "/createAccount")
     public String newUserProcess(HttpServletRequest request, @ModelAttribute("email") String userEmail,
                                  @ModelAttribute("username") String username, Model model) throws Exception {
+
         model.addAttribute("classActiveCreate", true);
         model.addAttribute("email", userEmail);
         model.addAttribute("username", username);
@@ -91,7 +93,7 @@ public class HomeController {
         }
 
         if (userService.findByEmail(userEmail) != null) {
-            model.addAttribute("email", true);
+            model.addAttribute("emailExists", true);
 
             return "views/myAccount";
         }
@@ -102,6 +104,7 @@ public class HomeController {
 
         String password = SecurityUtility.randomPassword();
         String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
+        user.setPassword(encryptedPassword);
 
         Role role = new Role();
         role.setRoleId(1);
@@ -133,9 +136,35 @@ public class HomeController {
     }
 
     @GetMapping(value = "/forgotPassword")
-    public String forgotPassword(Model model) {
+    public String forgotPassword(HttpServletRequest request, @ModelAttribute("recoverEmail") String userEmail,
+                                 @ModelAttribute("fName") String username, Model model) {
         model.addAttribute("title", "Forgot Password");
         model.addAttribute("classActiveForgot", true);
+
+        User user = userService.findByEmail(userEmail);
+
+        if (user != null) {
+            model.addAttribute("emailNotExist", true);
+            return "views/myAccount";
+        }
+
+        String password = SecurityUtility.randomPassword();
+        String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
+        user.setPassword(encryptedPassword);
+
+        userService.save(user);
+
+        String token = UUID.randomUUID().toString();
+        userService.createPasswordResetTokeForUser(user, token);
+
+        String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+
+        SimpleMailMessage newEmail = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, user, password);
+
+        javaMailSender.send(newEmail);
+
+        model.addAttribute("forgetPaswordEmailSent", true);
+
         return "views/myAccount";
     }
 
