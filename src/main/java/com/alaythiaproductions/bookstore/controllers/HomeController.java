@@ -17,10 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
@@ -135,15 +132,17 @@ public class HomeController {
         return "views/myAccount";
     }
 
-    @GetMapping(value = "/forgotPassword")
+    @RequestMapping(value = "/forgotPassword")
     public String forgotPassword(HttpServletRequest request, @ModelAttribute("recoverEmail") String userEmail,
                                  @ModelAttribute("fName") String username, Model model) {
         model.addAttribute("title", "Forgot Password");
         model.addAttribute("classActiveForgot", true);
 
         User user = userService.findByEmail(userEmail);
+        System.out.println(userEmail);
 
-        if (user != null) {
+
+        if (user == null) {
             model.addAttribute("emailNotExist", true);
             return "views/myAccount";
         }
