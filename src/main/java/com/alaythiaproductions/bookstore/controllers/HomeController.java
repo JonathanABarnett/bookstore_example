@@ -1,9 +1,11 @@
 package com.alaythiaproductions.bookstore.controllers;
 
+import com.alaythiaproductions.bookstore.models.Book;
 import com.alaythiaproductions.bookstore.models.User;
 import com.alaythiaproductions.bookstore.models.security.PasswordResetToken;
 import com.alaythiaproductions.bookstore.models.security.Role;
 import com.alaythiaproductions.bookstore.models.security.UserRole;
+import com.alaythiaproductions.bookstore.services.BookService;
 import com.alaythiaproductions.bookstore.services.UserSecurityService;
 import com.alaythiaproductions.bookstore.services.UserService;
 import com.alaythiaproductions.bookstore.utility.MailConstructor;
@@ -20,10 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 
 @Controller
@@ -40,6 +39,9 @@ public class HomeController {
 
     @Autowired
     private UserSecurityService userSecurityService;
+
+    @Autowired
+    private BookService bookService;
 
     @GetMapping(value = "/")
     public String index(Model model) {
@@ -132,6 +134,14 @@ public class HomeController {
         return "views/myAccount";
     }
 
+    @RequestMapping(value = "/bookshelf")
+    public String bookshelf(Model model) {
+        List<Book> books = bookService.findAll();
+        model.addAttribute("books", books);
+        return "views/bookshelf";
+    }
+
+
     @RequestMapping(value = "/forgotPassword")
     public String forgotPassword(HttpServletRequest request, @ModelAttribute("recoverEmail") String userEmail,
                                  @ModelAttribute("fName") String username, Model model) {
@@ -168,3 +178,4 @@ public class HomeController {
     }
 
 }
+//H3z3kiahCliveB@rnett

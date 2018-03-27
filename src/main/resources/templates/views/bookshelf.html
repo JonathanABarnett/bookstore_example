@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head"></head>
+
+<body id="my-account">
+
+<header th:replace="fragments::navbar"></header>
+
+
+<div class="container">
+    <span th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></span>
+
+    <div class="row" style="margin-top: 120px">
+        <div class="col-md-3">
+            <img th:src="@{/img/myaccount.png}" class="img-fluid" style="width: 90%"/>
+        </div>
+        <div class="col-md-9">
+            <div th:if="${emptyList}">
+                <h4 class="text text-danger">Oops, nothing was found. Try again.</h4>
+            </div>
+
+            <table class="table">
+                <thead><tr><th></th></tr></thead>
+                <tbody>
+                    <tr class="book-item" th:each="book : ${books}">
+                        <td>
+                            <div th:if="${book != null}">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                    <img class="img-fluid" th:src="#{adminPath} + @{/img/book/} + ${book.id} + '.png'" />
+                                    </div>
+                                <div class="col-xs-9">
+                                    <h4 th:text="${book.title}"></h4>
+                                    <span th:text="${book.publicationDate}"></span>
+                                    <span th:text="${book.author}"></span>
+                                    <span th:text="${book.format}"></span>
+                                    <span th:text="${book.numberOfPages}"> pages</span>
+                                    <span style="font-size: x-large; color:#db3208">$
+                                        <span th:text="${#numbers.formatDecimal(book.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
+                                    <span style="font-size: x-large; text-decoration: line-through">$
+                                        <span th:text="${#numbers.formatDecimal(book.listPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
+                                    <p th:text="${#strings.abbreviate(book.description, 5)}"></p>
+                                </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>
