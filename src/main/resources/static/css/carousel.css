@@ -22,6 +22,18 @@ body {
     z-index: 10;
 }
 
+
+.carousel-top {
+    width: 100%;
+    height: 32rem;
+
+}
+.carousel-top > img {
+    background-size: cover;
+    background-position: center center;
+}
+
+
 /* Declare heights because of positioning of img element */
 .carousel-item {
     height: 32rem;
@@ -33,8 +45,8 @@ body {
     left: 0;
     min-width: 100%;
     height: 32rem;
-}
 
+}
 
 
 

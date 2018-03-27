@@ -40,3 +40,7 @@
     background-repeat: repeat-y;
     background-size: cover;
 }
+
+.book-image {
+    max-height: 50px;
+}
