@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments::head"></head>
 
 <body>
@@ -10,67 +10,79 @@
 <div class="container" style="padding-top: 30px">
     <h3 class="text text-center" th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></h3>
 
-    <hr style="position: absolute; width: 100%; height: 6px; background-color: black; z-index: -1; margin-top: -10px" />
-        <img class="img-fluid" th:src="@{img/wood-tree1.jpg}" style="margin-top: -75px" />
+    <hr style="position: absolute; width: 100%; height: 6px; background-color: black; z-index: -1; margin-top: -10px"/>
+    <!-- <img class="img-fluid" th:src="@{img/wood-tree1.jpg}" style="margin-top: -75px" /> -->
+
+    <div th:if="${emptyList}">
+        <h4 class="text text-danger">Oops, nothing was found. Try again.</h4>
+    </div>
 
 
-    <div class="row" style="margin-top: 120px">
-        <div class="col-md-2">
-            <img th:src="@{/img/myaccount.png}" class="img-fluid" style="width: 90%"/>
-        </div>
-        <div class="col-md-10">
-            <div th:if="${emptyList}">
-                <h4 class="text text-danger">Oops, nothing was found. Try again.</h4>
-            </div>
+    <div class="row" style="margin-top: 30px">
 
-            <form th:action="@{/shoppingCart/addItem}" method="post">
-                <input hidden="hidden" th:field="*{book.id}" />
-                <div class="row" style="margin-top: 120px;">
-                    <div class="col-xs-3">
-                    <a th:href="@{/bookshelf}" ></a><br/>
-                        <img class="img-fluid" th:src="#{adminPath} + @{/img/book/} + ${book.id} + '.png'"/>
-                    </div>
-                    <div class="col-xs-9">
-                        <h3 th:text="${book.title}">Title</h3>
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <h5><strong>Author: </strong><span th:text="${book.author}"></span></h5>
-                                <p><strong>Publisher: </strong><span th:text="${book.publisher}"></span></p>
-                                <p><strong>Publication Date: </strong><span th:text="${book.publicationDate}"></span></p>
-                                <p><strong>Language: </strong><span th:text="${book.language}"></span></p>
-                                <p><strong>Category: </strong><span th:text="${book.category}"></span></p>
-                                <p><strong><span th:text="${book.format}"></span> : </strong><span th:text="${book.numberOfPages}"></span></p>
-                                <p><strong>ISBN: </strong><span th:text="${book.isbn}"></span></p>
-                                <p><strong>Shipping Weight: </strong><span th:text="${book.shippingWeight}"></span> ounces</p>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="col-xs-6">
-                                            <h4>Our Price: </h4><span style="color: #db3208;">$<span th:text="${#numbers.formatDecimal(book.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
-                                            <p>List Price: <span style="text-decoration: line-through">$<span th:text="${#numbers.formatDecimal(book.listPrice, 0, 'COMMA', 2, 'POINT')}"></span></span></p>
-                                            <p>You Save: <span style="text-decoration: line-through">$<span th:text="${#numbers.formatDecimal((book.listPrice - book.ourPrice), 0, 'COMMA', 2, 'POINT')}"></span></span></p>
-                                            <select name="qty">
-                                                <option th:each="qty : ${qtyList}" th:value="${qty}" th:text="${qty}" ></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <h4 th:if="*{book.inStockNumber &gt;10}" style="color: green;">In Stock</h4>
-                                            <h4 th:if="*{book.inStockNumber &lt;10 and book.inStockNumber &gt;0}" style="color: green">Limited Supply Left</h4>
-                                            <h4 th:if="*{book.inStockNumber == 0}" style="color: darkred">Unavailable</h4>
-                                            <button class="btn btn-warning" type="submit" style="color: black; border: 1px solid black; margin: 10px 40px 40px 10px;">Add To Cart</button>
-                                        </div>
+        <form th:action="@{/shoppingCart/addItem}" method="post">
+            <input hidden="hidden" th:field="*{book.id}"/>
+            <div class="row">
+                <div class="col-md-3">
+                    <a th:href="@{/bookshelf}">Back to Book List</a><br/>
+                    <img class="img-fluid" th:src="#{adminPath} + @{/img/book/} + ${book.id} + '.png'"/>
+                </div>
+                <div class="col-md-9">
+                    <h3 th:text="${book.title}">Title</h3>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h5><strong>Author: </strong><span th:text="${book.author}"></span></h5>
+                            <p><strong>Publisher: </strong><span th:text="${book.publisher}"></span></p>
+                            <p><strong>Publication Date: </strong><span th:text="${book.publicationDate}"></span></p>
+                            <p><strong>Language: </strong><span th:text="${book.language}"></span></p>
+                            <p><strong>Category: </strong><span th:text="${book.category}"></span></p>
+                            <p><strong><span th:text="${book.format}"></span> : </strong><span
+                                    th:text="${book.numberOfPages}"></span></p>
+                            <p><strong>ISBN: </strong><span th:text="${book.isbn}"></span></p>
+                            <p><strong>Shipping Weight: </strong><span th:text="${book.shippingWeight}"></span> ounces
+                            </p>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-sm-6">
+                                        <h4 class="card-text">Our Price: </h4><span style="color: #db3208;">$<span
+                                            th:text="${#numbers.formatDecimal(book.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
+                                        <p class="card-text">List Price: <span
+                                                style="text-decoration: line-through">$<span
+                                                th:text="${#numbers.formatDecimal(book.listPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
+                                        </p>
+                                        <p class="card-text">You Save: <span>$<span
+                                                th:text="${#numbers.formatDecimal((book.listPrice - book.ourPrice), 0, 'COMMA', 2, 'POINT')}"></span></span>
+                                        </p>
+                                        <select name="qty">
+                                            <option th:each="qty : ${qtyList}" th:value="${qty}"
+                                                    th:text="${qty}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 class="card-text" th:if="*{book.numberOfStock &gt;10}"
+                                            style="color: green;">In Stock</h4>
+                                        <h4 class="card-text"
+                                            th:if="*{book.numberOfStock &lt;10 and book.numberOfStock &gt;0}"
+                                            style="color: green">Limited Supply Left</h4>
+                                        <h4 class="card-text" th:if="*{book.numberOfStock == 0}" style="color: darkred">
+                                            Unavailable</h4>
+                                        <button class="btn btn-warning" type="submit"
+                                                style="color: black; border: 1px solid black; margin: 10px 40px 40px 10px;">
+                                            Add To Cart
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr />
-                        <p th:text="${book.description}"></p>
                     </div>
+                    <hr/>
+                    <p th:text="${book.description}"></p>
                 </div>
-            </form>
+            </div>
+        </form>
 
-        </div>
     </div>
 </div>
 

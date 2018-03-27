@@ -19,6 +19,7 @@ public class Book {
     private int numberOfPages;
     private String format;
     private String isbn;
+    private int numberOfStock;
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
@@ -26,7 +27,6 @@ public class Book {
 
     @Column(columnDefinition = "text")
     private String description;
-    private int inStockNumber;
 
     @Transient
     private MultipartFile bookImage;
@@ -151,12 +151,12 @@ public class Book {
         this.description = description;
     }
 
-    public int getInStockNumber() {
-        return inStockNumber;
+    public int getNumberOfStock() {
+        return numberOfStock;
     }
 
-    public void setInStockNumber(int inStockNumber) {
-        this.inStockNumber = inStockNumber;
+    public void setNumberOfStock(int numberOfStock) {
+        this.numberOfStock = numberOfStock;
     }
 
     public MultipartFile getBookImage() {

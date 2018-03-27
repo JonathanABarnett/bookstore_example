@@ -36,7 +36,7 @@
                                 <div class="col-md-9">
                                     <a th:href="@{/bookDetail?id=} + ${book.id}"><h4 th:text="${book.title}"></h4></a>
                                     <span th:text="${book.publicationDate}"></span>
-                                    <span th:text="${book.author}"></span>
+                                    <p th:text="${book.author}"></p>
                                     <span th:text="${book.format}"></span>
                                     <span th:text="${book.numberOfPages}"> pages</span>
                                     <span style="font-size: large; color:#db3208">$<span
