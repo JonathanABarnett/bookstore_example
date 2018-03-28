@@ -46,8 +46,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="col-sm-6">
-                                        <h4 class="card-text">Our Price: </h4><span style="color: #db3208;">$<span
-                                            th:text="${#numbers.formatDecimal(book.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
+                                        <h4 class="card-text">Our Price: <span style="color: #db3208;">$<span
+                                                th:text="${#numbers.formatDecimal(book.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span></h4>
                                         <p class="card-text">List Price: <span
                                                 style="text-decoration: line-through">$<span
                                                 th:text="${#numbers.formatDecimal(book.listPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <hr/>
-                    <p th:text="${book.description}"></p>
+                    <p th:utext="${book.description}"></p>
                 </div>
             </div>
         </form>

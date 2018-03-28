@@ -137,7 +137,14 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/bookshelf")
-    public String bookshelf(Model model) {
+    public String bookshelf(Model model, Principal principal) {
+
+        if (principal != null) {
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+
         List<Book> books = bookService.findAll();
         model.addAttribute("books", books);
         return "views/bookshelf";

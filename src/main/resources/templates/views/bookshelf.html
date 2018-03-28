@@ -10,7 +10,7 @@
 <div class="container" style="padding-top: 30px">
     <h3 class="text text-center" th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></h3>
 
-    <div class="row" style="margin-top: 120px">
+    <div class="row" style="margin-top: 20px">
         <div class="col-md-3">
             <img th:src="@{/img/myaccount.png}" class="img-fluid" style="width: 90%"/>
         </div>
@@ -39,11 +39,12 @@
                                     <p th:text="${book.author}"></p>
                                     <span th:text="${book.format}"></span>
                                     <span th:text="${book.numberOfPages}"> pages</span>
+                                    <br />
                                     <span style="font-size: large; color:#db3208">$<span
                                             th:text="${#numbers.formatDecimal(book.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
                                     <span style="text-decoration: line-through">$<span
                                             th:text="${#numbers.formatDecimal(book.listPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
-                                    <p th:text="${#strings.abbreviate(book.description, 500)}"></p>
+                                    <p th:utext="${#strings.abbreviate(book.description, 500)}"></p>
                                 </div>
                             </div>
                         </div>
