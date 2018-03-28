@@ -10,6 +10,7 @@ import com.alaythiaproductions.bookstore.services.UserSecurityService;
 import com.alaythiaproductions.bookstore.services.UserService;
 import com.alaythiaproductions.bookstore.utility.MailConstructor;
 import com.alaythiaproductions.bookstore.utility.SecurityUtility;
+import com.alaythiaproductions.bookstore.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -136,6 +137,30 @@ public class HomeController {
         return "views/myAccount";
     }
 
+    @GetMapping(value = "/myProfile")
+    public String loggedIn(Model model, Principal principal) {
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+            model.addAttribute("classActiveEdit", true);
+//            model.addAttribute("userPaymentList", user.getUserPaymentList());
+//            model.addAttribute("userShippingList", user.getShippingList());
+//            model.addAttribute("orderList", user.getOrderList());
+//
+//        UserShipping userShipping = new UserShipping();
+//        model.addAttribute("userShipping", userShipping);
+
+        model.addAttribute("listOfCreditCards", true);
+        model.addAttribute("listOfShippingAddresses", true);
+        List<String> stateList = USConstants.listOfUSStateCode;
+        Collections.sort(stateList);
+
+        model.addAttribute("stateList", stateList);
+
+
+        return "views/myProfile";
+    }
+
     @RequestMapping(value = "/bookshelf")
     public String bookshelf(Model model, Principal principal) {
 
@@ -181,7 +206,7 @@ public class HomeController {
 
         javaMailSender.send(newEmail);
 
-        model.addAttribute("forgetPaswordEmailSent", true);
+        model.addAttribute("forgetPasswordEmailSent", true);
 
         return "views/myAccount";
     }

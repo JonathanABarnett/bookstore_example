@@ -19,7 +19,8 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit" role="tab"
-                       aria-controls="home" aria-selected="true" th:classappend="${classActiveEdit}  ? ' active'">Edit</a>
+                       aria-controls="home" aria-selected="true"
+                       th:classappend="${classActiveEdit}  ? ' active'">Edit</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab"
@@ -27,18 +28,22 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="billing-tab" data-toggle="tab" href="#billing" role="tab"
-                       aria-controls="contact" aria-selected="false" th:classappend="${classActiveBilling}  ? ' active'">Billing</a>
+                       aria-controls="contact" aria-selected="false"
+                       th:classappend="${classActiveBilling}  ? ' active'">Billing</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab"
-                       aria-controls="contact" aria-selected="false" th:classappend="${classActiveShpping}  ? ' active'">Shipping</a>
+                       aria-controls="contact" aria-selected="false"
+                       th:classappend="${classActiveShpping}  ? ' active'">Shipping</a>
                 </li>
             </ul>
+
             <!-- Edit User Information -->
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show" id="edit" role="tabpanel" aria-labelledby="edit-tab" th:classappend="${classActiveEdit}  ? ' active'">
+                <div class="tab-pane fade show" id="edit" role="tabpanel" aria-labelledby="edit-tab"
+                     th:classappend="${classActiveEdit}  ? ' active'">
                     <form th:action="@{/updateUserInfo}" method="post">
-                        <input type="hidden" name="id" th:value="${user.id}" />
+                        <input type="hidden" name="id" th:value="${user.id}"/>
 
                         <div class="bg-info" th:if="${updateUserInfo}">User Information Updated</div>
 
@@ -46,74 +51,94 @@
                             <div class="form-row">
                                 <div class="col">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}" />
+                                    <input type="text" class="form-control" id="firstName" name="firstName"
+                                           th:value="${user.firstName}"/>
                                 </div>
                                 <div class="col">
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}" />
+                                    <input type="text" class="form-control" id="lastName" name="lastName"
+                                           th:value="${user.lastName}"/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" th:value="${user.username}" />
+                            <input type="text" class="form-control" id="username" name="username"
+                                   th:value="${user.username}"/>
                         </div>
                         <div class="form-group">
                             <label for="currentPassword">Current Password</label>
-                            <input type="text" class="form-control" id="currentPassword" name="currentPassword" th:value="${currentPassword}" />
+                            <input type="text" class="form-control" id="currentPassword" name="currentPassword"
+                                   th:value="${currentPassword}"/>
                         </div>
-                        <p class="text-mute">Enter your current password to change the email address or password.</p>
+                        <small class="text-mute">Enter your current password to change the email address or password.</small>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" />
+                            <input type="email" class="form-control" id="email" name="email" th:value="${user.email}"/>
                         </div>
                         <div class="form-group">
                             <label for="textConfirmPassword">Confirm Password</label>
-                            <input type="password" class="form-control" id="textConfirmPassword" name="newPassword" />
+                            <input type="password" class="form-control" id="textConfirmPassword" name="newPassword"/>
                         </div>
                         <div class="form-group">
                             <label for="textNewPassword">Password</label>
-                            <input type="password" class="form-control" id="textNewPassword" name="newPassword" />
+                            <input type="password" class="form-control" id="textNewPassword" name="newPassword"/>
                         </div>
                         <button class="btn btn-info" type="submit">Create New Account</button>
                     </form>
                 </div>
+
                 <!-- Order History -->
-                <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab" th:classappend="${classActiveOrders} ? ' show active'">
-                    <form>
-                        <div class="form-group">
-                            <label for="username">* Username</label>
-                            <input type="text" class="form-control" id="user" name="username" required="required"
-                                   placeholder="Enter Username"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">* Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                   required="required" placeholder="Enter Password"/>
-                        </div>
+                <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab"
+                     th:classappend="${classActiveOrders} ? ' show active'">
 
-                        <button class="btn btn-info" type="submit">Login</button>
-                    </form>
                 </div>
+
                 <!-- Billing Information -->
-                <div class="tab-pane fade" id="billing" role="tabpanel" aria-labelledby="billing-tab" th:classappend="${classActiveBilling}  ? ' active'">
-                    <form>
-                        <div class="form-group">
-                            <label for="recoverEmail">* Email</label>
-                            <input type="email" class="form-control" id="recoverEmail" name="email"
-                                   required="required" placeholder="Enter Email"/>
+                <div class="tab-pane fade" id="billing" role="tabpanel" aria-labelledby="billing-tab"
+                     th:classappend="${classActiveBilling}  ? ' active'">
+                    <div class="card">
+                        <div class="card-body">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">
+                                    <a th:href="@{/listOfCreditCard}" th:style="${listOfCreditCards}? 'color: red'">List of Credit Cards</a>
+                                </li>
+                                <li class="breadcrumb-item active">
+                                    <a th:href="@{/addNewCreditCard}" th:style="${addNewCreditCard}? 'color: red'">Add(Update) Credit Card</a>
+                                </li>
+                            </ol>
+                            <div th:if="${listOfCreditCards}">
+                                <form th:action="@{/setDefaultPayment}" method="post">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                               <th>Default</th>
+                                                <th>Credit Card</th>
+                                                <th>Operations</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="userPayment : ${userPaymentList}">
+                                                <td>
+                                                    <input type="radio" name="defaultUserPaymentId" th:value="${userPayment.id}" th:checked="${userPayment.default}" />
+                                                </td>
+                                                <td th:text="${userPayment.cardName}">
+                                                    <a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i class="fas fa-edit"></i></a>
+                                                    <a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i class="fas fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button class="btn btn-success" type="submit">Save</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="name">* Name</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                   required="required" placeholder="Enter Name"/>
-                        </div>
-
-                        <button class="btn btn-info" type="submit">Forgot Password</button>
-                    </form>
+                    </div>
                 </div>
+
                 <!-- Shipping History -->
-                <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab" th:classappend="${classActiveShipping}  ? ' active'">
+                <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab"
+                     th:classappend="${classActiveShipping}  ? ' active'">
                     <form>
                         <div class="form-group">
                             <label for="recoverEmail">* Email</label>

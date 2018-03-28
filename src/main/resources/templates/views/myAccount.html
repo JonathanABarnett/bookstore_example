@@ -28,6 +28,7 @@
                        aria-controls="contact" aria-selected="false" th:classappend="${classActiveForgot}  ? ' active'">Forgot Password</a>
                 </li>
             </ul>
+
             <!-- Create New User -->
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show" id="create" role="tabpanel" aria-labelledby="create-tab" th:classappend="${classActiveCreate}  ? ' active'">
@@ -51,6 +52,7 @@
                         <button class="btn btn-info" type="submit">Create Account</button>
                     </form>
                 </div>
+
                 <!-- Login -->
                 <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="login-tab" th:classappend="${classActiveLogin} ? ' show active'">
                     <div class="text text-danger" th:if="${param.error != null}">Incorrect Username or Password</div>
@@ -69,6 +71,7 @@
                         <button class="btn btn-info" type="submit">Login</button>
                     </form>
                 </div>
+
                 <!-- Forgot Password -->
                 <div class="tab-pane fade" id="forgot" role="tabpanel" aria-labelledby="forgot-tab" th:classappend="${classActiveForgot}  ? 'show active'">
                     <div class="text text-danger" th:if="${emailNotExist}">This email does not exist</div>
