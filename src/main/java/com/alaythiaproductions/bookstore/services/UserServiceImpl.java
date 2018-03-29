@@ -1,6 +1,8 @@
 package com.alaythiaproductions.bookstore.services;
 
 import com.alaythiaproductions.bookstore.models.User;
+import com.alaythiaproductions.bookstore.models.UserBilling;
+import com.alaythiaproductions.bookstore.models.UserPayment;
 import com.alaythiaproductions.bookstore.models.security.PasswordResetToken;
 import com.alaythiaproductions.bookstore.models.security.Role;
 import com.alaythiaproductions.bookstore.models.security.UserRole;
@@ -70,5 +72,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user) {
+        userPayment.setUser(user);
+        userPayment.setUserBilling(userBilling);
+        userPayment.setDefaultPayment(true);
+        userBilling.setUserPayment(userPayment);
+        user.getUserPaymentList().add(userPayment);
+        save(user);
     }
 }

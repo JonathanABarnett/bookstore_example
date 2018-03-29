@@ -9,7 +9,7 @@ public class UserShipping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String userShippingName;
-    private String userShippingStree1;
+    private String userShippingStreet1;
     private String userShippingStreet2;
     private String userShippingCity;
     private String userShippingState;
@@ -36,12 +36,12 @@ public class UserShipping {
         this.userShippingName = userShippingName;
     }
 
-    public String getUserShippingStree1() {
-        return userShippingStree1;
+    public String getUserShippingStreet1() {
+        return userShippingStreet1;
     }
 
-    public void setUserShippingStree1(String userShippingStree1) {
-        this.userShippingStree1 = userShippingStree1;
+    public void setUserShippingStreet1(String userShippingStreet1) {
+        this.userShippingStreet1 = userShippingStreet1;
     }
 
     public String getUserShippingStreet2() {

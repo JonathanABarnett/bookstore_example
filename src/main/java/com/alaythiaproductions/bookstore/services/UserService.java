@@ -1,6 +1,8 @@
 package com.alaythiaproductions.bookstore.services;
 
 import com.alaythiaproductions.bookstore.models.User;
+import com.alaythiaproductions.bookstore.models.UserBilling;
+import com.alaythiaproductions.bookstore.models.UserPayment;
 import com.alaythiaproductions.bookstore.models.security.PasswordResetToken;
 import com.alaythiaproductions.bookstore.models.security.UserRole;
 import com.alaythiaproductions.bookstore.repository.UserRepository;
@@ -20,4 +22,6 @@ public interface UserService {
     User createUser(User user, Set<UserRole> userRoles) throws Exception;
 
     User save(User user);
+
+    void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user);
 }

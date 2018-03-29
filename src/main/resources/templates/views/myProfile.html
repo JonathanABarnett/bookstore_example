@@ -131,7 +131,7 @@
                                         <tr>
                                             <th>Default</th>
                                             <th>Credit Card</th>
-                                            <th>Operations</th>
+                                            <th>Edit/Delete</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -139,11 +139,13 @@
                                             <td>
                                                 <input type="radio" name="defaultUserPaymentId"
                                                        th:value="${userPayment.id}"
-                                                       th:checked="${userPayment.default}"/>
+                                                       th:checked="${userPayment.defaultPayment}"/>
                                             </td>
                                             <td th:text="${userPayment.cardName}">
+                                            </td>
+                                            <td>
                                                 <a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i
-                                                        class="fas fa-edit"></i></a>
+                                                        class="fas fa-edit"></i></a>&nbsp; &nbsp; &nbsp;
                                                 <a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i
                                                         class="fas fa-trash-alt"></i></a>
                                             </td>
@@ -208,10 +210,10 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="billingZip">Zip Code</label>
-                                            <input type="text" class="form-control" id="billingZip"
+                                            <label for="billingZipcode">Zip Code</label>
+                                            <input type="text" class="form-control" id="billingZipcode"
                                                    placeholder="Zip Code"
-                                                   th:name="userBillingZip" required="required"
+                                                   th:name="userBillingZipcode" required="required"
                                                    th:value="${userBilling.userBillingZipcode}"/>
                                         </div>
                                     </div>
@@ -223,33 +225,48 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-sm-12">
-                                            <img th:src="@{/img/creditcard.png}" class="img-fluid"/><br/>
-                                            <div class="form-group">
-                                                <label for="cardType">* Select Card Type: </label>
-                                                <select class="form-control" id="cardType" th:name="type"
-                                                        th:value="${userPayment.type}">
-                                                    <option value="visa">Visa</option>
-                                                    <option value="visa">Mastercard</option>
-                                                    <option value="visa">American Express</option>
-                                                    <option value="visa">Discover</option>
-                                                </select>
+                                            <div class="form-row">
+                                                <div class="col-sm-4">
+                                                    <img th:src="@{/img/creditcards.png}" class="img-fluid"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-sm-8">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="cardType">* Select Card Type: </label>
+                                                        <select class="form-control" id="cardType" th:name="type"
+                                                                th:value="${userPayment.type}">
+                                                            <option value="Visa" th:selected="(${userPayment.type} == 'Visa')">Visa</option>
+                                                            <option value="Mastercard" th:selected="(${userPayment.type} == 'Mastercard')">Mastercard</option>
+                                                            <option value="American Express" th:selected="(${userPayment.type} == 'American Express')">American Express</option>
+                                                            <option value="Discover" th:selected="(${userPayment.type} == 'Discover')">Discover</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-sm-8">
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cardHolder">* Card Holder Name</label>
-                                                <input type="text" class="form-control" id="cardHolder"
+                                                <label for="holderName">* Card Holder Name</label>
+                                                <input type="text" class="form-control" id="holderName"
                                                        placeholder="First Name Last Name"
-                                                       th:name="cardHolder" required="required"
+                                                       th:name="holderName" required="required"
                                                        th:value="${userPayment.holderName}"/>
                                             </div>
                                             <div class="form-group">
                                                 <label for="cardNumber">* Card Number</label>
                                                 <div class="input-group">
-                                                    <input type="tel" class="form-control" id="cardNumber"
+                                                    <input type="number" class="form-control" id="cardNumber"
                                                            placeholder="Card Number"
                                                            th:name="cardNumber" required="required"
                                                            th:value="${userPayment.cardNumber}"/>
-                                                    <span class="input-group-addon">
-                                                        <i class="far fa-credit-card"></i></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,7 +278,7 @@
                                                 <div class="form-row">
                                                     <div class="col-sm-6">
                                                         <select class="form-control" id="expirationDate"
-                                                                th:name="expirayMonth" required="required"
+                                                                th:name="expiryMonth" required="required"
                                                                 th:value="${userPayment.expiryMonth}">
                                                             <option value="01">Jan (01)</option>
                                                             <option value="02">Feb (02)</option>
@@ -278,8 +295,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <select class="form-control" th:name="expirayYear"
-                                                                required="required"
+                                                        <select class="form-control"
+                                                                th:name="expiryYear" required="required"
                                                                 th:value="${userPayment.expiryYear}">
                                                             <option value="2018">2018</option>
                                                             <option value="2019">2019</option>
@@ -294,14 +311,14 @@
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="cardCVC">* CVC</label>
-                                                <input type="tel" class="form-control" id="cardCVC" th:name="cardCCV"
+                                                <input type="number" class="form-control" id="cardCVC" th:name="cvc"
                                                        required="required" th:value="${userPayment.cvc}"/>
                                             </div>
                                         </div>
                                     </div>
 
                                     <hr/>
-                                    <button class="btn btn-success" type="submit">Save All</button>
+                                    <button class="btn btn-success" type="submit">Save</button>
                                 </form>
                             </div>
                         </div>
