@@ -9,7 +9,7 @@ public class UserBilling {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String userBillingName;
-    private String userBillingStree1;
+    private String userBillingStreet1;
     private String userBillingStreet2;
     private String userBillingCity;
     private String userBillingState;
@@ -35,12 +35,12 @@ public class UserBilling {
         this.userBillingName = userBillingName;
     }
 
-    public String getUserBillingStree1() {
-        return userBillingStree1;
+    public String getUserBillingStreet1() {
+        return userBillingStreet1;
     }
 
-    public void setUserBillingStree1(String userBillingStree1) {
-        this.userBillingStree1 = userBillingStree1;
+    public void setUserBillingStreet1(String userBillingStreet1) {
+        this.userBillingStreet1 = userBillingStreet1;
     }
 
     public String getUserBillingStreet2() {

@@ -21,7 +21,7 @@ public class UserPayment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userPayment")
+    @OneToOne(mappedBy = "userPayment", cascade = CascadeType.ALL)
     private UserBilling userBilling;
 
     public long getId() {
