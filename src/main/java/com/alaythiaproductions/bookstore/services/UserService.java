@@ -7,6 +7,7 @@ import com.alaythiaproductions.bookstore.models.security.PasswordResetToken;
 import com.alaythiaproductions.bookstore.models.security.UserRole;
 import com.alaythiaproductions.bookstore.repository.UserRepository;
 
+import java.util.List;
 import java.util.Set;
 
 public interface UserService {
@@ -24,4 +25,7 @@ public interface UserService {
     User save(User user);
 
     void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user);
+
+    void setUserDefaultPayment(long userPaymentId, User user);
+
 }
