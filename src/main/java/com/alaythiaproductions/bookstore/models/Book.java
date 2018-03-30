@@ -3,6 +3,7 @@ package com.alaythiaproductions.bookstore.models;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -30,6 +31,9 @@ public class Book {
 
     @Transient
     private MultipartFile bookImage;
+
+    @OneToMany(mappedBy = "book")
+    private List<BookToCartItem> bookToCartItems;
 
     public Long getId() {
         return id;
@@ -165,5 +169,13 @@ public class Book {
 
     public void setBookImage(MultipartFile bookImage) {
         this.bookImage = bookImage;
+    }
+
+    public List<BookToCartItem> getBookToCartItems() {
+        return bookToCartItems;
+    }
+
+    public void setBookToCartItems(List<BookToCartItem> bookToCartItems) {
+        this.bookToCartItems = bookToCartItems;
     }
 }
