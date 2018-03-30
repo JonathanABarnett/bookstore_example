@@ -3,13 +3,11 @@ package com.alaythiaproductions.bookstore.services;
 import com.alaythiaproductions.bookstore.models.User;
 import com.alaythiaproductions.bookstore.models.UserBilling;
 import com.alaythiaproductions.bookstore.models.UserPayment;
+import com.alaythiaproductions.bookstore.models.UserShipping;
 import com.alaythiaproductions.bookstore.models.security.PasswordResetToken;
 import com.alaythiaproductions.bookstore.models.security.Role;
 import com.alaythiaproductions.bookstore.models.security.UserRole;
-import com.alaythiaproductions.bookstore.repository.PasswordResetTokenRepository;
-import com.alaythiaproductions.bookstore.repository.RoleRepository;
-import com.alaythiaproductions.bookstore.repository.UserPaymentRepository;
-import com.alaythiaproductions.bookstore.repository.UserRepository;
+import com.alaythiaproductions.bookstore.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserPaymentRepository userPaymentRepository;
+
+    @Autowired
+    private UserShippingRepository userShippingRepository;
 
     @Override
     public PasswordResetToken getPasswordResetToken(final String token) {
@@ -100,6 +101,30 @@ public class UserServiceImpl implements UserService {
             } else {
                 userPayment.setDefaultPayment(false);
                 userPaymentRepository.save(userPayment);
+            }
+        }
+    }
+
+    @Override
+    public void updateUserShipping(UserShipping userShipping, User user) {
+        userShipping.setUser(user);
+        userShipping.setUserShippingDefault(true);
+
+        user.getUserShippingList().add(userShipping);
+        save(user);
+    }
+
+    @Override
+    public void setUserDefaultShipping(long userDefaultShipping, User user) {
+        List<UserShipping> userShippingList = userShippingRepository.findAll();
+
+        for (UserShipping userShipping : userShippingList) {
+            if (userShipping.getId() == userDefaultShipping) {
+                userShipping.setUserShippingDefault(true);
+                userShippingRepository.save(userShipping);
+            } else {
+                userShipping.setUserShippingDefault(false);
+                userShippingRepository.save(userShipping);
             }
         }
     }

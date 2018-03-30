@@ -3,6 +3,7 @@ package com.alaythiaproductions.bookstore.services;
 import com.alaythiaproductions.bookstore.models.User;
 import com.alaythiaproductions.bookstore.models.UserBilling;
 import com.alaythiaproductions.bookstore.models.UserPayment;
+import com.alaythiaproductions.bookstore.models.UserShipping;
 import com.alaythiaproductions.bookstore.models.security.PasswordResetToken;
 import com.alaythiaproductions.bookstore.models.security.UserRole;
 import com.alaythiaproductions.bookstore.repository.UserRepository;
@@ -27,5 +28,9 @@ public interface UserService {
     void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user);
 
     void setUserDefaultPayment(long userPaymentId, User user);
+
+    void updateUserShipping(UserShipping userShipping, User user);
+
+    void setUserDefaultShipping(long userDefaultShipping, User user);
 
 }
