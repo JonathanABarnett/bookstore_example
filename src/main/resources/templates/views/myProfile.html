@@ -41,7 +41,7 @@
             <!-- Edit User Information -->
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show" id="edit" role="tabpanel" aria-labelledby="edit-tab"
-                     th:classappend="${classActiveEdit}  ? ' active'">
+                     th:classappend="${classActiveEdit}  ? 'show active'">
                     <div class="card">
                         <div class="card-body">
                             <form th:action="@{/updateUserInfo}" method="post">
@@ -329,7 +329,10 @@
                                     </div>
 
                                     <hr/>
-                                    <button class="btn btn-success" type="submit">Save</button>
+
+                                        <button class="btn btn-success" type="submit">Save</button>
+                                        <a class="btn btn-danger" th:href="@{/listOfCreditCards}">Cancel</a>
+
                                 </form>
                             </div>
                         </div>
@@ -338,7 +341,7 @@
 
                 <!-- Shipping Information -->
                 <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab"
-                     th:classappend="${classActiveShipping}  ? ' active'">
+                     th:classappend="${classActiveShipping}  ? 'show active'">
                     <div class="card">
                         <div class="card-body">
                             <ol class="breadcrumb">
@@ -370,7 +373,8 @@
                                             <td>
                                                 <input type="radio" name="defaultShippingAddressId"
                                                        th:value="${userShipping.id}"
-                                                       th:checked="${userShipping.userShippingDefault}"/><span>Default</span>
+                                                       th:checked="${userShipping.userShippingDefault}"/>
+
                                             </td>
                                             <td th:text="${userShipping.userShippingStreet1} + ', ' + ${userShipping.userShippingCity}
                                                 + ', ' + ${userShipping.userShippingState}">
@@ -442,7 +446,10 @@
                                         </div>
                                     </div>
                                     <hr/>
-                                    <button class="btn btn-success" type="submit">Save</button>
+
+                                        <button class="btn btn-success" type="submit">Save</button>
+                                        <a class="btn btn-danger" th:href="@{/listOfShippingAddresses}">Cancel</a>
+
                                 </form>
                             </div>
                         </div>
