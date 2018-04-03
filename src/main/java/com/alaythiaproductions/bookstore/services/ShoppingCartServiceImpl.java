@@ -1,0 +1,40 @@
+package com.alaythiaproductions.bookstore.services;
+
+import com.alaythiaproductions.bookstore.models.CartItem;
+import com.alaythiaproductions.bookstore.models.ShoppingCart;
+import com.alaythiaproductions.bookstore.repository.ShoppingCartRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@Service
+public class ShoppingCartServiceImpl implements ShoppingCartService{
+
+    @Autowired
+    private ShoppingCartRepository shoppingCartRepository;
+
+    @Autowired
+    private CartItemService cartItemService;
+
+    @Override
+    public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) {
+        BigDecimal cartTotal = new BigDecimal(0);
+
+        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+
+        for (CartItem cartItem : cartItemList) {
+            if (cartItem.getBook().getNumberOfStock() > 0) {
+                cartItemService.updateCartItem(cartItem);
+                cartTotal = cartTotal.add(cartItem.getSubTotal());
+            }
+        }
+
+        shoppingCart.setGrandTotal(cartTotal);
+
+        shoppingCartRepository.save(shoppingCart);
+
+        return shoppingCart;
+    }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head"></head>
+
+<body>
+
+<header th:replace="fragments::navbar"></header>
+
+
+<div class="container" style="padding-top: 30px">
+    <h3 class="text text-center" th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></h3>
+
+    <hr style="position: absolute; width: 100%; height: 6px; background-color: black; z-index: -1; margin-top: -10px"/>
+    <!-- <img class="img-fluid" th:src="@{img/wood-tree1.jpg}" style="margin-top: -75px" /> -->
+
+
+    <div class="row" style="margin-top: 30px">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    <a class="btn btn-primary" th:href="@{/bookshelf}">Continue Shopping</a>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <a class="btn btn-primary" th:href="@{/checkout(id=${shoppingCart.id})}">Checkout</a>
+                </div>
+                <br/>
+                <br/>
+                <div th:if="${notEnoughStock}" class="alert alert-warning">
+                    Oops, some of the products don't have enough stock. Please update product quantity.
+                </div>
+                <div th:if="${emptyCart}" class="alert alert-warning">
+                    Oops, your cart is empty. Please find a product and add it to your cart.
+                </div>
+                <br/>
+                <br/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h4>Products</h4>
+        </div>
+        <div class="col-sm-2">
+            <h4>Price</h4>
+        </div>
+        <div class="col-sm-2">
+            <h4>Quantity</h4>
+        </div>
+
+        <div class="row" th:each="cartItem : ${cartItemList}">
+            <form th:action="@{/shoppingCart/updateCartItem}" method="post">
+                <hr/>
+                <div class="col-sm-2">
+                    <a th:href="@{bookDetail(id=${cartItem.book.id})}">
+                        <img class="img-fluid" th:src="#{adminPath} + @{/image/book/} + ${cartItem.book.id} + '.png'"/>
+                    </a>
+                    <p th:if="${cartItem.book.numberOfStock&gt;10}" style="color: green;">In Stock</p>
+                    <p th:if="${cartItem.book.numberOfStock&lt;10 and cartItem.book.numberOfStock&gt;0}"
+                       style="color: yellow;">Only <span th:text="${cartItem.book.inStockNumber}"></span></p>
+                    <p th:if="${cartItem.book.numberOfStock==0}" style="color: darkred;">Out of Stock</p>
+                </div>
+                <div class="col-sm-2">
+                    <h5 style="color: dodgerblue; font-size: large">$<span th:text="${cartItem.book.ourPrice}"
+                                                                           th:style="${cartItem.book.numberOfStock}==0? 'text-decoration: line-through' : ''"></span>
+                    </h5>
+                </div>
+                <div class="col-sm-2">
+                    <input hidden="hidden" name="id" th:value="${cartItem.id}"/>
+                    <input th:id="${cartItem.id}" th:name="qty" th:disabled="${cartItem.book.numberOfStock==0}"
+                           class="form-control cartItemQty" th:value="${cartItem.qty}"/>
+                    <button style="display:none;" th:id="'update-item-' + ${cartItem.id}" type="submit"
+                            class="btn btn-warning btn-sm">Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <h4 class="col-sm-12 text-right"><strong style="font-size: large;">Total Price (
+            <span th:text="${#lists.size(cartItemList)}"></span> items ):</strong>
+            <span style="color: #db3208; font-size: large;">$<span th:text="${shoppingCart.grandTotal}"></span></span>
+        </h4>
+    </div>
+</div>
+
+
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>
