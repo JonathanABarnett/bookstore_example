@@ -17,6 +17,10 @@
         <h4 class="text text-danger">Oops, nothing was found. Try again.</h4>
     </div>
 
+    <div th:if="${notEnoughStock}" class="alert alert-warning">
+        Oops, we don't have enough stock. Please update product quantity.
+    </div>
+
 
     <div class="row" style="margin-top: 30px">
 
@@ -65,7 +69,7 @@
                                             style="color: green;">In Stock</h4>
                                         <h4 class="card-text"
                                             th:if="*{book.numberOfStock &lt;10 and book.numberOfStock &gt;0}"
-                                            style="color: green">Limited Supply Left</h4>
+                                            style="color: green">Limited Supply Left <span>(<span th:text="${book.numberOfStock}"></span> left)</span></h4>
                                         <h4 class="card-text" th:if="*{book.numberOfStock == 0}" style="color: darkred">
                                             Unavailable</h4>
                                         <button class="btn btn-warning" type="submit"

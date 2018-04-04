@@ -11,7 +11,11 @@ public interface CartItemService {
 
     List<CartItem> findByShoppingCart(ShoppingCart shoppingCart);
 
+    CartItem findById(Long cartItemId);
+
     CartItem updateCartItem(CartItem cartItem);
 
     CartItem addBookToCartItem(Book book, User user, Integer qty);
+
+    void removeCartItem(CartItem cartItem);
 }
