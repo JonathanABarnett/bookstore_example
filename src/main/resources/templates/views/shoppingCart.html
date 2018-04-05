@@ -57,24 +57,26 @@
                 <div class="form-group col-md-6">
                     <div class="form-row">
                         <div class="form-group col">
-                    <a th:href="@{/bookDetail(id=${cartItem.book.id})}">
-                        <img class="img-fluid" style="max-width: 100px"
-                             th:src="#{adminPath} + @{/img/book/} + ${cartItem.book.id} + '.png'"/>
-                    </a>
+                            <a th:href="@{/bookDetail(id=${cartItem.book.id})}">
+                                <img class="img-fluid" style="max-width: 100px"
+                                     th:src="#{adminPath} + @{/img/book/} + ${cartItem.book.id} + '.png'"/>
+                            </a>
                         </div>
-                        <div class="form-group col text-left" >
-                    <a th:href="@{/bookDetail(id=${cartItem.book.id})}"><h5 th:text="${cartItem.book.title}"></h5></a>
+                        <div class="form-group col text-left">
+                            <a th:href="@{/bookDetail(id=${cartItem.book.id})}"><h5
+                                    th:text="${cartItem.book.title}"></h5></a>
                             <p th:if="${cartItem.book.numberOfStock&gt;10}" style="color: green;">In Stock</p>
                             <p th:if="${cartItem.book.numberOfStock&lt;10 and cartItem.book.numberOfStock&gt;0}"
-                               style="color: orange;">Only <span th:text="${cartItem.book.numberOfStock}"> Left in Stock</span></p>
+                               style="color: orange;">Only <span
+                                    th:text="${cartItem.book.numberOfStock}"> Left in Stock</span></p>
                             <p th:if="${cartItem.book.numberOfStock==0}" style="color: darkred;">Out of Stock</p>
                             <a th:href="@{/shoppingCart/removeItem?id=} + ${cartItem.id}">Delete All</a>
                         </div>
-                </div>
+                    </div>
                 </div>
                 <div class="form-group col-md-3">
                     <h5 style="color: green; font-size: large">$<span th:text="${cartItem.book.ourPrice}"
-                                                                           th:style="${cartItem.book.numberOfStock}==0? 'text-decoration: line-through' : ''"></span>
+                                                                      th:style="${cartItem.book.numberOfStock}==0? 'text-decoration: line-through' : ''"></span>
                     </h5>
                 </div>
                 <div class="form-group col-md-3">
@@ -82,7 +84,7 @@
                     <input th:id="${cartItem.id}" th:name="qty" th:disabled="${cartItem.book.numberOfStock==0}"
                            class="form-control cartItemQty" th:value="${cartItem.qty}"/>
                     <button style="display: none;" th:id="'update-item-' + ${cartItem.id}" type="submit"
-                            class="btn btn-warning btn-sm" >Update
+                            class="btn btn-warning btn-sm">Update
                     </button>
                 </div>
             </div>
