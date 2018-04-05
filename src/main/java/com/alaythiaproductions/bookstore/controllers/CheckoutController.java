@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class CheckoutController {
     private Payment payment = new Payment();
 
     @RequestMapping(value = "/checkout")
-    public String checkout(@RequestParam("id") Long cartId, @RequestParam(value = "missingRequiredField", required = false) boolean missingRequireField,
+    public String checkout(@RequestParam(value = "id") Long cartId, @RequestParam(value = "missingRequiredField", required = false) boolean missingRequireField,
                            Model model, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());

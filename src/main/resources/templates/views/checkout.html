@@ -74,11 +74,12 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+
                                         <tr th:each="userShipping : ${userShippingList}">
                                             <td th:text="${userShipping.userShippingStreet1} + ' ' + ${userShipping.userShippingStreet2} + ', ' + ${userShipping.userShippingCity} + ', ' + ${userShipping.userShippingState}"></td>
-                                            <a th:href="${/setShippingAddress(userShippingId=${userShipping.id})}">Use
+                                            <td><a th:href="@{/setShippingAddress(userShippingId=${userShipping.id})}">Use
                                                 This
-                                                Address</a>
+                                            Address</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -155,9 +156,9 @@
                                             <tbody>
                                             <tr th:each="userPayment : ${userPaymentList}">
                                                 <td th:text="${userPayment.cardName}"></td>
-                                                <a th:href="${/setPaymentMethod(userPaymentId=${userPayment.id})}">Use
+                                                <td><a th:href="@{/setPaymentMethod(userPaymentId=${userPayment.id})}">Use
                                                     This
-                                                    Payment</a>
+                                                    Payment</a></td>
                                             </tr>
                                             </tbody>
                                         </table>
