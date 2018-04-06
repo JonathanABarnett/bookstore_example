@@ -65,7 +65,7 @@
                         <div class="form-group col text-left">
                             <a th:href="@{/bookDetail(id=${cartItem.book.id})}"><h5
                                     th:text="${cartItem.book.title}"></h5></a>
-                            <p th:if="${cartItem.book.numberOfStock&gt;10}" style="color: green;">In Stock</p>
+                            <p th:if="${cartItem.book.numberOfStock&gt;=10}" style="color: green;">In Stock</p>
                             <p th:if="${cartItem.book.numberOfStock&lt;10 and cartItem.book.numberOfStock&gt;0}"
                                style="color: orange;">Only <span
                                     th:text="${cartItem.book.numberOfStock}"> Left in Stock</span></p>

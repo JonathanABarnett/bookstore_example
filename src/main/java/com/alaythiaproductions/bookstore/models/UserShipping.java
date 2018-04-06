@@ -13,7 +13,7 @@ public class UserShipping {
     private String userShippingStreet2;
     private String userShippingCity;
     private String userShippingState;
-    private String userShippingCountry;
+    private String userShippingCountry = "USA";
     private String userShippingZipcode;
     private boolean userShippingDefault;
 
