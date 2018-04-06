@@ -88,6 +88,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(Long id){
+        return userRepository.findOne(id);
+    }
+
+    @Override
     public void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user) {
         userPayment.setUser(user);
         userPayment.setUserBilling(userBilling);

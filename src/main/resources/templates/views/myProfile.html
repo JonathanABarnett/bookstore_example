@@ -47,7 +47,11 @@
                             <form th:action="@{/updateUserInfo}" method="post">
                                 <input type="hidden" name="id" th:value="${user.id}"/>
 
-                                <div class="bg-info" th:if="${updateUserInfo}">User Information Updated</div>
+                                <div class="alert alert-success" th:if="${updateSuccess}">
+                                    <strong>Information Updated</strong></div>
+                                <div class="alert alert-danger" th:if="${incorrectPassword}">
+                                    <strong>Please enter the correct password for the user.</strong>
+                                </div>
 
                                 <div class="form-group">
                                     <div class="form-row">
@@ -70,7 +74,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="currentPassword"><strong>Current Password</strong></label>
-                                    <input type="text" class="form-control" id="currentPassword" name="currentPassword"
+                                    <input type="text" class="form-control" id="currentPassword" name="password"
                                            th:value="${currentPassword}"/>
                                     <small class="text-mute">Enter your current password to change the email address or
                                         password.
@@ -82,16 +86,16 @@
                                            th:value="${user.email}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="textConfirmPassword"><strong>Confirm Password</strong></label>
-                                    <input type="password" class="form-control" id="textConfirmPassword"
+                                    <label for="txtNewPassword"><strong>Password</strong></label>
+                                    <span id="checkPasswordMatch" style="color: red"></span>
+                                    <input type="password" class="form-control" id="txtNewPassword"
                                            name="newPassword"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="textNewPassword"><strong>Password</strong></label>
-                                    <input type="password" class="form-control" id="textNewPassword"
-                                           name="newPassword"/>
+                                    <label for="txtConfirmPassword"><strong>Confirm Password</strong></label>
+                                    <input type="password" class="form-control" id="txtConfirmPassword" onchange="checkPasswordMatch()"/>
                                 </div>
-                                <button class="btn btn-info" type="submit">Update Account</button>
+                                <button id="updateUserInfoButton" class="btn btn-info" type="submit">Update Account</button>
                             </form>
                         </div>
                     </div>
@@ -291,29 +295,29 @@
                                                         <select class="form-control" id="expirationDate"
                                                                 th:name="expiryMonth" required="required"
                                                                 th:value="${userPayment.expiryMonth}">
-                                                            <option value="01">Jan (01)</option>
-                                                            <option value="02">Feb (02)</option>
-                                                            <option value="03">Mar (03)</option>
-                                                            <option value="04">Apr (04)</option>
-                                                            <option value="05">May (05)</option>
-                                                            <option value="06">Jun (06)</option>
-                                                            <option value="07">Jul (07)</option>
-                                                            <option value="08">Aug (08)</option>
-                                                            <option value="09">Sep (09)</option>
-                                                            <option value="10">Oct (10)</option>
-                                                            <option value="11">Nov (11)</option>
-                                                            <option value="12">Dec (12)</option>
+                                                            <option value="01" th:selected="(${userPayment.expiryMonth} == 'Jan (01)')">Jan (01)</option>
+                                                            <option value="02" th:selected="(${userPayment.expiryMonth} == 'Feb (02)')">Feb (02)</option>
+                                                            <option value="03" th:selected="(${userPayment.expiryMonth} == 'Mar (03)')">Mar (03)</option>
+                                                            <option value="04" th:selected="(${userPayment.expiryMonth} == 'Apr (04)')">Apr (04)</option>
+                                                            <option value="05" th:selected="(${userPayment.expiryMonth} == 'May (05)')">May (05)</option>
+                                                            <option value="06" th:selected="(${userPayment.expiryMonth} == 'Jun (06)')">Jun (06)</option>
+                                                            <option value="07" th:selected="(${userPayment.expiryMonth} == 'Jul (07)')">Jul (07)</option>
+                                                            <option value="08" th:selected="(${userPayment.expiryMonth} == 'Aug (08)')">Aug (08)</option>
+                                                            <option value="09" th:selected="(${userPayment.expiryMonth} == 'Sep (09)')">Sep (09)</option>
+                                                            <option value="10" th:selected="(${userPayment.expiryMonth} == 'Oct (10)')">Oct (10)</option>
+                                                            <option value="11" th:selected="(${userPayment.expiryMonth} == 'Nov (11)')">Nov (11)</option>
+                                                            <option value="12" th:selected="(${userPayment.expiryMonth} == 'Dec (12)')">Dec (12)</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <select class="form-control"
                                                                 th:name="expiryYear" required="required"
                                                                 th:value="${userPayment.expiryYear}">
-                                                            <option value="2018">2018</option>
-                                                            <option value="2019">2019</option>
-                                                            <option value="2020">2020</option>
-                                                            <option value="2021">2021</option>
-                                                            <option value="2022">2022</option>
+                                                            <option value="2018" th:selected="(${userPayment.expiryYear} == '2018')">2018</option>
+                                                            <option value="2019" th:selected="(${userPayment.expiryYear} == '2019')">2019</option>
+                                                            <option value="2020" th:selected="(${userPayment.expiryYear} == '2020')">2020</option>
+                                                            <option value="2021" th:selected="(${userPayment.expiryYear} == '2021')">2021</option>
+                                                            <option value="2022" th:selected="(${userPayment.expiryYear} == '2022')">2022</option>
                                                         </select>
                                                     </div>
                                                 </div>

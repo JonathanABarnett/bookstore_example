@@ -21,6 +21,10 @@
         Oops, we don't have enough stock. Please update product quantity.
     </div>
 
+    <div th:if="${addBookSuccess}" class="alert alert-success">
+        Added Book to  Shopping Cart!
+    </div>
+
 
     <div class="row" style="margin-top: 30px">
 
@@ -65,7 +69,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h4 class="card-text" th:if="*{book.numberOfStock &gt;10}"
+                                        <h4 class="card-text" th:if="*{book.numberOfStock &gt;=10}"
                                             style="color: green;">In Stock</h4>
                                         <h4 class="card-text"
                                             th:if="*{book.numberOfStock &lt;10 and book.numberOfStock &gt;0}"

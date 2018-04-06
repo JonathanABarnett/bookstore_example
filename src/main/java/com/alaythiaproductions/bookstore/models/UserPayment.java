@@ -13,7 +13,7 @@ public class UserPayment {
     private String cardNumber;
     private int expiryMonth;
     private int expiryYear;
-    private int cvc;
+    private String cvc;
     private String holderName;
     private boolean defaultPayment;
 
@@ -72,11 +72,11 @@ public class UserPayment {
         this.expiryYear = expiryYear;
     }
 
-    public int getCvc() {
+    public String getCvc() {
         return cvc;
     }
 
-    public void setCvc(int cvc) {
+    public void setCvc(String cvc) {
         this.cvc = cvc;
     }
 

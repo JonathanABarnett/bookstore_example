@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head"></head>
+
+<body>
+
+<header th:replace="fragments::navbar"></header>
+
+
+<div class="container">
+    <div class="row" style="margin-top: 120px">
+        <div class="col-3">
+            <img th:src="@{/img/myaccount.png}" class="img-fluid" style="width: 90%"/>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="alert alert-success">
+                        <h3><i class="fas fa-check-square" style="color: limegreen"></i>
+                        Thank you, your order has been submitted.</h3>
+                        <h4>The estimated delivery date is <span th:text="${estimatedDeliveryDate}"></span></h4>
+                    </div>
+                    <h3>List of Items</h3>
+
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <h5>Product</h5>
+                        </div>
+                        <div class="col-sm-2">
+                            <h5>Price</h5>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5>Quantity</h5>
+                        </div>
+                    </div>
+
+                    <div class="row" th:each="cartItem : ${cartItemList}">
+
+                        <hr/>
+
+                        <div class="form-group col-md-7">
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <a th:href="@{/bookDetail(id=${cartItem.book.id})}">
+                                        <img class="img-fluid" style="max-width: 100px"
+                                             th:src="#{adminPath} + @{/img/book/} + ${cartItem.book.id} + '.png'"/>
+                                    </a>
+                                </div>
+                                <div class="form-group col text-left">
+                                    <a th:href="@{/bookDetail(id=${cartItem.book.id})}"><h6
+                                            th:text="${cartItem.book.title}"></h6></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <p style="color: green; font-size: large">$<span
+                                    th:text="${cartItem.book.ourPrice}"></span>
+                            </p>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p style="font-size:large;" th:text="${cartItem.qty}"></p>
+                        </div>
+
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>

@@ -2,16 +2,19 @@ package com.alaythiaproductions.bookstore.controllers;
 
 import com.alaythiaproductions.bookstore.models.*;
 import com.alaythiaproductions.bookstore.services.*;
+import com.alaythiaproductions.bookstore.utility.MailConstructor;
 import com.alaythiaproductions.bookstore.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class CheckoutController {
@@ -30,13 +33,21 @@ public class CheckoutController {
     private UserShippingService userShippingService;
     @Autowired
     private UserPaymentService userPaymentService;
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private JavaMailSender mailSender;
+    @Autowired
+    private MailConstructor mailConstructor;
 
 
     private ShippingAddress shippingAddress = new ShippingAddress();
     private BillingAddress billingAddress = new BillingAddress();
     private Payment payment = new Payment();
 
-    @RequestMapping(value = "/checkout")
+    @GetMapping(value = "/checkout")
     public String checkout(@RequestParam(value = "id") Long cartId, @RequestParam(value = "missingRequiredField", required = false) boolean missingRequiredField,
                            Model model, Principal principal) {
 
@@ -112,6 +123,63 @@ public class CheckoutController {
         return "views/checkout";
     }
 
+    @PostMapping(value = "/checkout")
+    public String processCheckout(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
+                                  @ModelAttribute("billingAddress") BillingAddress billingAddress,
+                                  @ModelAttribute("payment") Payment payment,
+                                  @ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
+                                  @ModelAttribute("shippingMethod") String shippingMethod,
+                                  Principal principal, Model model) {
+        ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
+        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+        model.addAttribute("cartItemList", cartItemList);
+
+        if (billingSameAsShipping.equals("true")) {
+            billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
+            billingAddress.setBillingAddressStreet1(shippingAddress.getShippingAddressStreet1());
+            billingAddress.setBillingAddressStreet2(shippingAddress.getShippingAddressStreet2());
+            billingAddress.setBillingAddressCity(shippingAddress.getShippingAddressCity());
+            billingAddress.setBillingAddressState(shippingAddress.getShippingAddressState());
+            billingAddress.setBillingAddressZipcode(shippingAddress.getShippingAddressZipcode());
+            billingAddress.setBillingAddressCountry(shippingAddress.getShippingAddressCountry());
+        }
+
+        if (shippingAddress.getShippingAddressStreet1().isEmpty() ||
+                shippingAddress.getShippingAddressCity().isEmpty() ||
+                shippingAddress.getShippingAddressState().isEmpty() ||
+                shippingAddress.getShippingAddressName().isEmpty() ||
+                shippingAddress.getShippingAddressZipcode().isEmpty() ||
+                payment.getCardNumber().isEmpty() ||
+                payment.getCvc().equals("0") ||
+                billingAddress.getBillingAddressStreet1().isEmpty() ||
+                billingAddress.getBillingAddressCity().isEmpty() ||
+                billingAddress.getBillingAddressState().isEmpty() ||
+                billingAddress.getBillingAddressName().isEmpty() ||
+                billingAddress.getBillingAddressZipcode().isEmpty())
+            return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
+
+        User user = userService.findByUsername(principal.getName());
+
+        Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod, user);
+
+        mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
+
+        shoppingCartService.clearShoppingCart(shoppingCart);
+
+        LocalDate today = LocalDate.now();
+        LocalDate estimatedDeliveryDate;
+
+        if (shippingMethod.equals("groundShipping")) {
+            estimatedDeliveryDate = today.plusDays(5);
+        } else {
+            estimatedDeliveryDate = today.plusDays(3);
+        }
+
+        model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
+
+        return "views/orderSubmitPage";
+    }
+
     @RequestMapping(value = "/setShippingAddress")
     public String setShippingAddress(@RequestParam("userShippingId") Long userShippingId, Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
@@ -124,7 +192,6 @@ public class CheckoutController {
             shippingAddressService.setByUserShipping(userShipping, shippingAddress);
 
             List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
-
 
 
             model.addAttribute("shippingAddress", shippingAddress);
@@ -154,7 +221,6 @@ public class CheckoutController {
 
 
             return "views/checkout";
-
         }
     }
 

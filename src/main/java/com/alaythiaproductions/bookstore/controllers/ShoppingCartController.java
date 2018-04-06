@@ -53,6 +53,8 @@ public class ShoppingCartController {
             model.addAttribute("emptyCart", true);
         }
 
+        model.addAttribute("addBookSuccess", true);
+
         return "views/shoppingCart";
     }
 
