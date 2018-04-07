@@ -93,9 +93,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="txtConfirmPassword"><strong>Confirm Password</strong></label>
-                                    <input type="password" class="form-control" id="txtConfirmPassword" onchange="checkPasswordMatch()"/>
+                                    <input type="password" class="form-control" id="txtConfirmPassword"
+                                           onchange="checkPasswordMatch()"/>
                                 </div>
-                                <button id="updateUserInfoButton" class="btn btn-info" type="submit">Update Account</button>
+                                <button id="updateUserInfoButton" class="btn btn-info" type="submit">Update Account
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -107,6 +109,111 @@
                     <div class="card">
                         <div class="card-body">
 
+                            <table class="table table-sm table-inverse">
+                                <thead>
+                                <tr>
+                                    <th>Order Date</th>
+                                    <th>Order Number</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="order : ${orderList}">
+                                    <td><a th:href="@{/orderDetail(id=${order.id})}"><span
+                                            th:text="${order.orderDate}"></span></a></td>
+                                    <td data-th-text="${order.id}"></td>
+                                    <td data-th-text="${order.orderTotal}"></td>
+                                    <td data-th-text="${order.orderStatus}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div th:if="${displayOrderDetail}">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="text-center">
+                                            <h2>Order Detail for Purchase #<span th:text="${order.id}"></span></h2>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="card-header"><strong>Billing Details</strong></div>
+                                                <div class="card-body">
+                                                    <span th:text="${order.billingAddress.billingAddressName}"></span><br/>
+                                                    <span th:text="${order.billingAddress.billingAddressStreet1} + ' ' + ${order.billingAddress.billingAddressStreet2}"></span><br/>
+                                                    <span th:text="${order.billingAddress.billingAddressCity} + ', ' + ${order.billingAddress.billingAddressState} + ' ' ${order.billingAddress.billingAddressZipcode}"></span><br/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="card-header"><strong>Payment Information</strong></div>
+                                                <div class="card-body">
+                                                    <span th:text="${order.payment.holderName}"> Card name</span><br/>
+                                                    <span>Exp. Date: </span><span th:text="${order.payment.cardNumber}"> Card Number</span><br/>
+                                                    <span th:text="${order.payment.expiryMonth} + ' ' ${order.payment.expiryYear}""></span><br/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="card-header"><strong>Shipping Details</strong></div>
+                                                <div class="card-body">
+                                                    <span th:text="${order.shippingAddress.shippingAddressName}"></span><br/>
+                                                    <span th:text="${order.shippingAddress.shippingAddressStreet1} + ' ' + ${order.shippingAddress.shippingAddressStreet2}"></span><br/>
+                                                    <span th:text="${order.shippingAddress.shippingAddressCity} + ', ' + ${order.shippingAddress.shippingAddressState} + ' ' ${order.shippingAddress.shippingAddressZipcode}"></span><br/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-header">
+                                            <h3 class="text-center"><strong>Order Summary</strong></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <div class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <td><strong>Item Name</strong></td>
+                                                            <td class="text-center"><strong>Item Price</strong></td>
+                                                            <td class="text-center"><strong>Item Quantity</strong></td>
+                                                            <td class="text-right"><strong>Total</strong></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="cartItem : ${cartItemList}">
+                                                            <td data-th-text="${cartItem.book.title}"></td>
+                                                            <td class="text-center" data-th-text="${cartItem.book.ourPrice}"></td>
+                                                            <td class="text-center" data-th-text="${cartItem.qty}"></td>
+                                                            <td class="text-right" data-th-text="${cartItem.subTotal}"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="highrow"></td>
+                                                            <td class="highrow"></td>
+                                                            <td class="highrow text-center"><strong>Subtotal</strong></td>
+                                                            <td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="emptyrow"></td>
+                                                            <td class="emptyrow"></td>
+                                                            <td class="emptyrow text-center"><strong>Tax</strong></td>
+                                                            <td class="emptyrow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal * 0.06, 0, 2)}"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="emptyrow"><i class="fas fa-barcode"></i></td>
+                                                            <td class="emptyrow"></td>
+                                                            <td class="emptyrow text-center"><strong>Total</strong></td>
+                                                            <td class="emptyrow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal, 0, 2)}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -295,29 +402,80 @@
                                                         <select class="form-control" id="expirationDate"
                                                                 th:name="expiryMonth" required="required"
                                                                 th:value="${userPayment.expiryMonth}">
-                                                            <option value="01" th:selected="(${userPayment.expiryMonth} == 'Jan (01)')">Jan (01)</option>
-                                                            <option value="02" th:selected="(${userPayment.expiryMonth} == 'Feb (02)')">Feb (02)</option>
-                                                            <option value="03" th:selected="(${userPayment.expiryMonth} == 'Mar (03)')">Mar (03)</option>
-                                                            <option value="04" th:selected="(${userPayment.expiryMonth} == 'Apr (04)')">Apr (04)</option>
-                                                            <option value="05" th:selected="(${userPayment.expiryMonth} == 'May (05)')">May (05)</option>
-                                                            <option value="06" th:selected="(${userPayment.expiryMonth} == 'Jun (06)')">Jun (06)</option>
-                                                            <option value="07" th:selected="(${userPayment.expiryMonth} == 'Jul (07)')">Jul (07)</option>
-                                                            <option value="08" th:selected="(${userPayment.expiryMonth} == 'Aug (08)')">Aug (08)</option>
-                                                            <option value="09" th:selected="(${userPayment.expiryMonth} == 'Sep (09)')">Sep (09)</option>
-                                                            <option value="10" th:selected="(${userPayment.expiryMonth} == 'Oct (10)')">Oct (10)</option>
-                                                            <option value="11" th:selected="(${userPayment.expiryMonth} == 'Nov (11)')">Nov (11)</option>
-                                                            <option value="12" th:selected="(${userPayment.expiryMonth} == 'Dec (12)')">Dec (12)</option>
+                                                            <option value="01"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Jan (01)')">
+                                                                Jan (01)
+                                                            </option>
+                                                            <option value="02"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Feb (02)')">
+                                                                Feb (02)
+                                                            </option>
+                                                            <option value="03"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Mar (03)')">
+                                                                Mar (03)
+                                                            </option>
+                                                            <option value="04"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Apr (04)')">
+                                                                Apr (04)
+                                                            </option>
+                                                            <option value="05"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'May (05)')">
+                                                                May (05)
+                                                            </option>
+                                                            <option value="06"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Jun (06)')">
+                                                                Jun (06)
+                                                            </option>
+                                                            <option value="07"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Jul (07)')">
+                                                                Jul (07)
+                                                            </option>
+                                                            <option value="08"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Aug (08)')">
+                                                                Aug (08)
+                                                            </option>
+                                                            <option value="09"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Sep (09)')">
+                                                                Sep (09)
+                                                            </option>
+                                                            <option value="10"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Oct (10)')">
+                                                                Oct (10)
+                                                            </option>
+                                                            <option value="11"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Nov (11)')">
+                                                                Nov (11)
+                                                            </option>
+                                                            <option value="12"
+                                                                    th:selected="(${userPayment.expiryMonth} == 'Dec (12)')">
+                                                                Dec (12)
+                                                            </option>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <select class="form-control"
                                                                 th:name="expiryYear" required="required"
                                                                 th:value="${userPayment.expiryYear}">
-                                                            <option value="2018" th:selected="(${userPayment.expiryYear} == '2018')">2018</option>
-                                                            <option value="2019" th:selected="(${userPayment.expiryYear} == '2019')">2019</option>
-                                                            <option value="2020" th:selected="(${userPayment.expiryYear} == '2020')">2020</option>
-                                                            <option value="2021" th:selected="(${userPayment.expiryYear} == '2021')">2021</option>
-                                                            <option value="2022" th:selected="(${userPayment.expiryYear} == '2022')">2022</option>
+                                                            <option value="2018"
+                                                                    th:selected="(${userPayment.expiryYear} == '2018')">
+                                                                2018
+                                                            </option>
+                                                            <option value="2019"
+                                                                    th:selected="(${userPayment.expiryYear} == '2019')">
+                                                                2019
+                                                            </option>
+                                                            <option value="2020"
+                                                                    th:selected="(${userPayment.expiryYear} == '2020')">
+                                                                2020
+                                                            </option>
+                                                            <option value="2021"
+                                                                    th:selected="(${userPayment.expiryYear} == '2021')">
+                                                                2021
+                                                            </option>
+                                                            <option value="2022"
+                                                                    th:selected="(${userPayment.expiryYear} == '2022')">
+                                                                2022
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -334,8 +492,8 @@
 
                                     <hr/>
 
-                                        <button class="btn btn-success" type="submit">Save</button>
-                                        <a class="btn btn-danger" th:href="@{/listOfCreditCards}">Cancel</a>
+                                    <button class="btn btn-success" type="submit">Save</button>
+                                    <a class="btn btn-danger" th:href="@{/listOfCreditCards}">Cancel</a>
 
                                 </form>
                             </div>
@@ -451,8 +609,8 @@
                                     </div>
                                     <hr/>
 
-                                        <button class="btn btn-success" type="submit">Save</button>
-                                        <a class="btn btn-danger" th:href="@{/listOfShippingAddresses}">Cancel</a>
+                                    <button class="btn btn-success" type="submit">Save</button>
+                                    <a class="btn btn-danger" th:href="@{/listOfShippingAddresses}">Cancel</a>
 
                                 </form>
                             </div>

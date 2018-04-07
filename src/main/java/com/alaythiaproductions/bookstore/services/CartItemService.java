@@ -1,9 +1,6 @@
 package com.alaythiaproductions.bookstore.services;
 
-import com.alaythiaproductions.bookstore.models.Book;
-import com.alaythiaproductions.bookstore.models.CartItem;
-import com.alaythiaproductions.bookstore.models.ShoppingCart;
-import com.alaythiaproductions.bookstore.models.User;
+import com.alaythiaproductions.bookstore.models.*;
 
 import java.util.List;
 
@@ -20,4 +17,6 @@ public interface CartItemService {
     void removeCartItem(CartItem cartItem);
 
     CartItem save(CartItem cartItem);
+
+    List<CartItem> findByOrder(Order order);
 }

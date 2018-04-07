@@ -37,6 +37,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserPayment> userPaymentList;
 
+    @OneToMany(mappedBy = "user")
+    private List<Order> orderList;
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private ShoppingCart shoppingCart;
 
@@ -108,6 +111,38 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    public List<UserShipping> getUserShippingList() {
+        return userShippingList;
+    }
+
+    public void setUserShippingList(List<UserShipping> userShippingList) {
+        this.userShippingList = userShippingList;
+    }
+
+    public List<UserPayment> getUserPaymentList() {
+        return userPaymentList;
+    }
+
+    public void setUserPaymentList(List<UserPayment> userPaymentList) {
+        this.userPaymentList = userPaymentList;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -134,29 +169,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public List<UserShipping> getUserShippingList() {
-        return userShippingList;
-    }
-
-    public void setUserShippingList(List<UserShipping> userShippingList) {
-        this.userShippingList = userShippingList;
-    }
-
-    public List<UserPayment> getUserPaymentList() {
-        return userPaymentList;
-    }
-
-    public void setUserPaymentList(List<UserPayment> userPaymentList) {
-        this.userPaymentList = userPaymentList;
-    }
-
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
     }
 }
