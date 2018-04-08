@@ -563,7 +563,7 @@ public class HomeController {
             Collections.sort(stateList);
             model.addAttribute("stateList", stateList);
 
-            model.addAttribute("addNewShippingAddress", true);
+            model.addAttribute("listOfShippingAddresses", true);
             model.addAttribute("classActiveOrders", true);
             model.addAttribute("displayOrderDetail", true);
             model.addAttribute("listOfCreditCards", true);

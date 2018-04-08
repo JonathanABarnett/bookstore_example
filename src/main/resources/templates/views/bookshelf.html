@@ -7,7 +7,7 @@
 <header th:replace="fragments::navbar"></header>
 
 
-<div class="container" style="padding-top: 30px">
+<div class="container" style="padding-top: 30px" >
     <h3 class="text text-center" th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></h3>
 
     <div class="row" style="margin-top: 20px">
@@ -20,7 +20,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-            <table class="table">
+            <table class="table" id="bookList">
                 <thead>
                 <tr>
                     <th scope="col" class="text-center" >Book List</th>
@@ -61,5 +61,20 @@
 
 
 <div th:replace="fragments::scripts"></div>
+<script>
+    $(document).ready(function() {
+       $('#bookList').DataTable({
+           "lengthMenu": [[5, 10, 15, 20, -1],[5, 10, 15, 20, "All"]],
+           "ordering": false,
+           statesave: true
+       });
+
+      /* $('#bookList').on('page.dt', function() {
+           $('html, body').animate({
+               scrollTop: $('#bookList').offSet().top
+           }, 200);
+       }); */
+    });
+</script>
 </body>
 </html>

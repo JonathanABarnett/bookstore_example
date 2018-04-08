@@ -232,18 +232,18 @@
                                                             <select class="form-control" id="expirationDate"
                                                                     th:name="expiryMonth" required="required"
                                                                     th:value="${payment.expiryMonth}">
-                                                                <option value="01" th:selected="(${payment.expiryMonth} == 'Jan (01)')">Jan (01)</option>
-                                                                <option value="02" th:selected="(${payment.expiryMonth} == 'Feb (02)')">Feb (02)</option>
-                                                                <option value="03" th:selected="(${payment.expiryMonth} == 'Mar (03)')">Mar (03)</option>
-                                                                <option value="04" th:selected="(${payment.expiryMonth} == 'Apr (04)')">Apr (04)</option>
-                                                                <option value="05" th:selected="(${payment.expiryMonth} == 'May (05)')">May (05)</option>
-                                                                <option value="06" th:selected="(${payment.expiryMonth} == 'Jun (06)')">Jun (06)</option>
-                                                                <option value="07" th:selected="(${payment.expiryMonth} == 'Jul (07)')">Jul (07)</option>
-                                                                <option value="08" th:selected="(${payment.expiryMonth} == 'Aug (08)')">Aug (08)</option>
-                                                                <option value="09" th:selected="(${payment.expiryMonth} == 'Sep (09)')">Sep (09)</option>
-                                                                <option value="10" th:selected="(${payment.expiryMonth} == 'Oct (10)')">Oct (10)</option>
-                                                                <option value="11" th:selected="(${payment.expiryMonth} == 'Nov (11)')">Nov (11)</option>
-                                                                <option value="12" th:selected="(${payment.expiryMonth} == 'Dec (12)')">Dec (12)</option>
+                                                                <option value="01" th:selected="(${payment.expiryMonth} == '01')">Jan (01)</option>
+                                                                <option value="02" th:selected="(${payment.expiryMonth} == '02')">Feb (02)</option>
+                                                                <option value="03" th:selected="(${payment.expiryMonth} == '03')">Mar (03)</option>
+                                                                <option value="04" th:selected="(${payment.expiryMonth} == '04')">Apr (04)</option>
+                                                                <option value="05" th:selected="(${payment.expiryMonth} == '05')">May (05)</option>
+                                                                <option value="06" th:selected="(${payment.expiryMonth} == '06')">Jun (06)</option>
+                                                                <option value="07" th:selected="(${payment.expiryMonth} == '07')">Jul (07)</option>
+                                                                <option value="08" th:selected="(${payment.expiryMonth} == '08')">Aug (08)</option>
+                                                                <option value="09" th:selected="(${payment.expiryMonth} == '09')">Sep (09)</option>
+                                                                <option value="10" th:selected="(${payment.expiryMonth} == '10')">Oct (10)</option>
+                                                                <option value="11" th:selected="(${payment.expiryMonth} == '11')">Nov (11)</option>
+                                                                <option value="12" th:selected="(${payment.expiryMonth} == '12')">Dec (12)</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -262,9 +262,9 @@
                                             </div>
                                             <div class="col-sm-5">
                                                 <div class="form-group">
-                                                    <label for="cardCVC">* CVC</label>
-                                                    <input type="text" class="form-control" id="cardCVC" name="cvc"
-                                                           required="required" th:value="${payment.cvc}"/>
+                                                    <label for="cvc">* CVC</label>
+                                                    <input type="number" class="form-control" id="cvc" name="cvc"
+                                                           required="required" th:value="${payment.cvc}" placeholder="CVC"/>
                                                 </div>
                                             </div>
                                         </div>
