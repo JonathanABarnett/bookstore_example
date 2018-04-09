@@ -41,6 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/bookshelf",
             "/bookDetail",
             "/hours",
+            "/searchByCategory",
+            "/searchBook",
             "login"
     };
 

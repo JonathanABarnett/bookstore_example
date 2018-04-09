@@ -8,16 +8,25 @@
 
 
 <div class="container" style="padding-top: 30px" >
-    <h3 class="text text-center" th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></h3>
+    <h3 class="text text-center" style="margin-bottom: 20px" th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></h3>
+
+    <div style="margin: 25px" th:if="${emptyList}">
+        <h4 class="text text-danger">Nothing was found. Try again.</h4>
+    </div>
 
     <div class="row" style="margin-top: 20px">
         <div class="col-md-3">
-            <img th:src="@{/img/myaccount.png}" class="img-fluid" style="width: 90%"/>
+            <h3><label for="category">Category</label></h3>
+            <div class="list-group" id="category">
+                <a th:href="@{/bookshelf(category='all')}" th:classappend="${activeAll}? 'active'" class="list-group-item">All</a>
+                <a th:href="@{/searchByCategory(category='Management')}" th:classappend="${activeManagement}? ' active'" class="list-group-item">Management</a>
+                <a th:href="@{/searchByCategory(category='Fiction')}" th:classappend="${activeFiction}? ' active'" class="list-group-item">Fiction</a>
+                <a th:href="@{/searchByCategory(category='History')}" th:classappend="${activeHistory}? ' active'" class="list-group-item">History</a>
+                <a th:href="@{/searchByCategory(category='Religion')}" th:classappend="${activeReligion}? 'active'" class="list-group-item">Religion</a>
+            </div>
         </div>
         <div class="col-md-9">
-            <div th:if="${emptyList}">
-                <h4 class="text text-danger">Oops, nothing was found. Try again.</h4>
-            </div>
+
             <div class="card">
                 <div class="card-body">
             <table class="table" id="bookList">
@@ -58,6 +67,7 @@
         </div>
     </div>
 </div>
+
 <div th:replace="fragments :: footer"></div>
 
 <div th:replace="fragments::scripts"></div>

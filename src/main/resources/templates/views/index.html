@@ -8,60 +8,74 @@
 
 
 <main role="main">
+    <!--             -->
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <!--            -->
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-top carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="first-slide img-fluid" src="../../static/img/Mountains_2720x1880/m5-min.png"
+                             th:src="@{/img/Mountains_2720x1880/m5-min.png}" alt="First slide"/>
+                        <div class="container">
+                            <div class="carousel-caption text-left">
+                                <h1>Mountains #1</h1>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                                    porta
+                                    gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-top carousel-item">
+                        <img class="second-slide img-fluid" src="../../static/img/Mountains_2720x1880/m8-min.png"
+                             th:src="@{/img/Mountains_2720x1880/m8-min.png}" alt="Second slide"/>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1>Mountains #2</h1>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                                    porta
+                                    gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-top carousel-item">
+                        <img class="third-slide img-fluid" src="../../static/img/Mountains_2720x1880/m10-min.png"
+                             th:src="@{/img/Mountains_2720x1880/m10-min.png}" alt="Third slide"/>
+                        <div class="container">
+                            <div class="carousel-caption text-right">
+                                <h1>Mountains #3</h1>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                                    porta
+                                    gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-top carousel-inner">
-            <div class="carousel-item active">
-                <img class="first-slide img-fluid" src="../../static/img/Mountains_2720x1880/m5-min.png"
-                     th:src="@{/img/Mountains_2720x1880/m5-min.png}" alt="First slide"/>
-                <div class="container">
-                    <div class="carousel-caption text-left">
-                        <h1>Mountains #1</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-top carousel-item">
-                <img class="second-slide img-fluid" src="../../static/img/Mountains_2720x1880/m8-min.png"
-                     th:src="@{/img/Mountains_2720x1880/m8-min.png}" alt="Second slide"/>
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Mountains #2</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-top carousel-item">
-                <img class="third-slide img-fluid" src="../../static/img/Mountains_2720x1880/m10-min.png"
-                     th:src="@{/img/Mountains_2720x1880/m10-min.png}" alt="Third slide"/>
-                <div class="container">
-                    <div class="carousel-caption text-right">
-                        <h1>Mountains #3</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-                    </div>
-                </div>
+
+                <!--            -->
             </div>
         </div>
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        <div class="col-2"></div>
     </div>
+    <!--            -->
 
     <!-- Card Container -->
     <div class="container marketing">
@@ -83,7 +97,8 @@
                                                                                alt="Card image cap"/></a>
                 <div class="card-body">
                     <h5 class="card-title">Location</h5>
-                    <p class="card-text">Located in the heart of Springfield, near the Old State Capital. Lincoln would
+                    <p class="card-text">Located in the heart of Springfield, near the Old State Capital. Lincoln
+                        would
                         be proud.</p>
                 </div>
                 <div class="card-footer">
@@ -94,7 +109,8 @@
                 <img class="card-img-top" th:src="@{/img/thank_yousm.png}" alt="Card image cap"/>
                 <div class="card-body">
                     <h5 class="card-title">About Us</h5>
-                    <p class="card-text">Information about our store, some history of who we were and what we're trying
+                    <p class="card-text">Information about our store, some history of who we were and what we're
+                        trying
                         to accomplish.</p>
                 </div>
                 <div class="card-footer">

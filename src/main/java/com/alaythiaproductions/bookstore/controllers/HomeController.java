@@ -251,6 +251,7 @@ public class HomeController {
 
         List<Book> books = bookService.findAll();
         model.addAttribute("books", books);
+        model.addAttribute("activeAll", true);
         return "views/bookshelf";
     }
 
