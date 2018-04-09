@@ -35,6 +35,15 @@ $(document).ready(function () {
         $('#update-item-' + id).css('display', 'inline-block');
     });
     $("#theSameAsShippingAddress").on('click', checkBillingAddress);
-    $("#txtNewPassword, #txtConfirmPassword").keyup(checkPasswordMatch);
+
+    $('#txtNewPassword, #txtConfirmPassword').on('keyup', function () {
+        if ($('#txtNewPassword').val() == $('#txtConfirmPassword').val()) {
+            $('#checkPasswordMatch').html('Passwords Match!').css('color', 'green');
+            $('#updateUserInfoButton').prop('disabled', false);
+            console.log('#updateUserInfoButton').prop();
+        } else
+            $('#checkPasswordMatch').html('Passwords Do Not Match').css('color', 'red');
+            $('#updateUserInfoButton').prop('disabled', true);
+    });
     // $("#textNewPassword").keyup(checkPasswordMatch);
 });
