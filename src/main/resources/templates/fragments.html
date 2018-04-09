@@ -32,8 +32,8 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/bookshelf">Browse Books</a>
-                        <a class="dropdown-item" href="#">Store Hours &#38; Location</a>
-                        <a class="dropdown-item" href="#">FAQ</a>
+                        <a class="dropdown-item" th:href="@{/hours}">Store Hours &#38; Location</a>
+                        <a class="dropdown-item" href="#">About</a>
                     </div>
                 </li>
                 <form class="form-inline mt-2 mt-md-0">
@@ -60,7 +60,48 @@
     </nav>
 </header>
 
-<div th:fragment="scripts">
+<div th:fragment="footer">
+    <br/><br/>
+    <footer>
+        <div class="row">
+            <div class="col-3 footerLeft">
+                <div class="logofooter">
+                    <a th:href="@{/}"><img th:src="@{/img/jb-logo1.png}" style="width: 200px;" /> </a>
+                </div>
+                <p>JB's Books and Writings <br/>Selling new and odd books.</p>
+            </div>
+            <div class="col-3 paddingtop-bottom">
+                <h6 class="heading7">CONTACT</h6>
+                <ul class="post">
+                    <p><a href="https://goo.gl/maps/ryCQKEA6oks" ><i class="fas fa-map-marker"></i></a> 123 Road St.<br/>  Springfield, IL 62704</p>
+                    <p><i class="fas fa-phone"></i> Phone : 1-888-555-5555</p>
+                    <p><i class="fas fa-envelope"></i> E-mail : info@jbbooks.com</p>
+                </ul>
+            </div>
+            <div class="col-3 paddingtop-bottom">
+                <h6 class="heading7">LINKS</h6>
+                <ul class="footer-ul">
+                    <li><a href="#"> Privacy Policy </a></li>
+                    <li><a href="#"> Terms &#38; Conditions </a></li>
+                    <li><a href="#"> Picture of a Dog </a></li>
+                </ul>
+            </div>
+            <div class="col-3 paddingtop-bottom">
+                <h6 class="heading7">COPYRIGHT</h6>
+                <ul class="footer-ul">
+                    <li>&copy; 2018 - All Rights Reserved</li>     <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Site Map</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<span th:fragment="scripts">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -75,7 +116,7 @@
     <script th:src="@{/js/dataTables.bootstrap4.js}"></script>
 
     <script type="text/javascript" th:src="@{/js/script.js}"></script>
-</div>
+</span>
 
 </body>
 </html>

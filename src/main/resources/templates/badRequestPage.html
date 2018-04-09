@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head"></head>
+
+<body id="my-account">
+
+<header th:replace="fragments::navbar"></header>
+
+
+<div class="container">
+    <div class="row" style="margin-top: 120px">
+        <div class="col-3">
+            <img th:src="@{/img/myaccount.png}" class="img-fluid" style="width: 90%"/>
+        </div>
+        <div class="col-6">
+            <div class="alert alert-warning">
+                <h1>Ah ah ah, you didn't say the magic word!</h1>
+            <br/>
+                <br/>
+                <p>Please go back to the home page. </p><span><a th:href="@{/}"><h1><i class="fas fa-arrow-left"></i></h1></a></span>
+            </div>
+        </div>
+        <div class="col-3">
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragents :: footer"></div>
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>
