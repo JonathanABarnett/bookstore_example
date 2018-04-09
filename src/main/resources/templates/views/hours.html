@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head"></head>
+
+<body id="my-account">
+
+<header th:replace="fragments::navbar"></header>
+
+
+<div class="container">
+    <div class="row" style="margin-top: 120px">
+        <div class="col-2">
+            <img th:src="@{/img/myaccount.png}" class="img-fluid" style="width: 90%"/>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <a href="https://goo.gl/maps/ryCQKEA6oks" target="_blank"><img class="card-img-top" th:src="@{/img/Mapsm.png}" alt="Card image cap"/></a>
+                <div class="card-body">
+                    <h5 class="card-title">Location</h5>
+                    <p class="card-text">Located in the heart of Springfield, near the Old State Capital. Lincoln would
+                        be proud.</p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/}" class="btn btn-primary">Home Page</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Hours</h3>
+                </div>
+                <ul class="list-group list-group-hover">
+                    <li class="list-group-item"><strong>Monday:</strong> 8AM-8PM</li>
+                    <li class="list-group-item"><strong>Tuesday:</strong> 9AM-6PM</li>
+                    <li class="list-group-item"><strong>Wednesday:</strong> 6AM-5PM</li>
+                    <li class="list-group-item"><strong>Thursday:</strong> 11AM-2PM</li>
+                    <li class="list-group-item"><strong>Friday:</strong> 9AM-6PM</li>
+                    <li class="list-group-item"><strong>Saturday:</strong> 8AM-11PM</li>
+                    <li class="list-group-item"><strong>Sunday: CLOSED</strong></li>
+                </ul>
+                <div class="card-footer text-muted">
+                    *All days subject to change.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>

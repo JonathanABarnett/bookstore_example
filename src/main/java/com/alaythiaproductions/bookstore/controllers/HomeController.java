@@ -62,6 +62,12 @@ public class HomeController {
         return "views/index";
     }
 
+    @GetMapping(value = "/hours")
+    public String hours(Model model) {
+        model.addAttribute("title", "Hours and Directions");
+        return "views/hours";
+    }
+
     @GetMapping(value = "/login")
     public String login(Model model) {
         model.addAttribute("title", "Login");

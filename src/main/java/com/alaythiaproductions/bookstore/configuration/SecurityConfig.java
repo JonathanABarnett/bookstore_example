@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/forgotPassword",
             "/bookshelf",
             "/bookDetail",
+            "/hours",
             "login"
     };
 
