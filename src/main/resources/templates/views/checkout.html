@@ -2,10 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments::head"></head>
 
-<body id="my-account">
+<body>
 
 <header th:replace="fragments::navbar"></header>
 
+<div class="row" style="margin-top: 30px;">
+    <div class="col-2">
+       <!-- <img th:src="@{/img/shopping_cart.png}" class="img-fluid text-center" style="text-align: center;"/> -->
+    </div>
+    <div class="col-8">
+       <h3> <span class="text-center" style="text-align: center;" th:text="${user.firstName} + ' ' + ${user.lastName} + '\'s Shopping Cart'"></span> </h3>
+    </div>
+    <div class="col-2"></div>
+</div>
 
 <div class="container">
     <div class="row" style="margin-top: 60px">

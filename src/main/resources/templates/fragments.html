@@ -17,7 +17,7 @@
 <body>
 <header th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/"><img class="img-responsive" id="brand-image" th:src="@{/img/jb-logo1.png}"/>JB's
+        <a class="navbar-brand" href="/"><img class="img-responsive" id="brand-image" th:src="@{/img/book_logo1.png}"/>JB's
             Books</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/bookshelf">Browse Books</a>
                         <a class="dropdown-item" th:href="@{/hours}">Store Hours &#38; Location</a>
-                        <a class="dropdown-item" href="#">About</a>
+                        <a class="dropdown-item" th:href="@{/about}">About</a>
                     </div>
                 </li>
                 <form class="form-inline mt-2 mt-md-0" th:action="@{/searchBook}" method="post">
@@ -68,7 +68,7 @@
                 <div class="logofooter">
                     <a th:href="@{/}"><img th:src="@{/img/jb-logo1.png}" style="width: 200px;" /> </a>
                 </div>
-                <p style="padding-left: 15px">JB's Books and Writings <br/>Selling new and odd books.</p>
+                <p style="padding-left: 15px">JB's Books <br/>Selling New and Odd Books.</p>
             </div>
             <div class="col-3 paddingtop-bottom">
                 <h6 class="heading7">CONTACT</h6>

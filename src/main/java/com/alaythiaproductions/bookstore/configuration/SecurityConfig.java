@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/hours",
             "/searchByCategory",
             "/searchBook",
+            "/about",
             "login"
     };
 

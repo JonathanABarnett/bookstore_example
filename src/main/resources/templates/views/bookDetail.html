@@ -11,7 +11,7 @@
     <h3 class="text text-center" th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></h3>
 
     <hr style="position: absolute; width: 100%; height: 6px; background-color: black; z-index: -1; margin-top: -10px"/>
-    <!-- <img class="img-fluid" th:src="@{img/wood-tree1.jpg}" style="margin-top: -75px" /> -->
+
 
     <div th:if="${emptyList}">
         <h4 class="text text-danger">Oops, nothing was found. Try again.</h4>

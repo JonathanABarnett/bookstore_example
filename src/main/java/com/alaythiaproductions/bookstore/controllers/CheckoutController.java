@@ -52,7 +52,7 @@ public class CheckoutController {
                            Model model, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());
-
+        model.addAttribute("user", user);
 
         if (cartId != user.getShoppingCart().getId()) {
             return "badRequestPage1";
